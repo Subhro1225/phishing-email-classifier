@@ -15,6 +15,7 @@ phishing-email-classifier/
 │
 ├── venv/                      → Virtual environment (do not commit)
 ├── explore_data.py            → Data loading & cleaning pipeline
+├── feature_extraction.py      → Feature Engineering (TF-IDF)
 ├── requirements.txt           → All dependencies
 └── README.md                  → You are here
 ```
@@ -89,14 +90,14 @@ Output:
 ### Phase 2 — Feature Engineering
 > Convert raw email text into numbers the model can learn from.
 
-- [ ] Combine subject + body into one text field
-- [ ] Apply TF-IDF vectorization (converts text to weighted word numbers)
-- [ ] Extract hand-crafted features:
-  - [ ] urgency word count (urgent, verify, click here, suspended...)
-  - [ ] number of links in body
-  - [ ] caps ratio (% of uppercase characters)
-  - [ ] exclamation mark count
-  - [ ] body length
+- [x] Combine subject + body into one text field
+- [x] Apply TF-IDF vectorization (converts text to weighted word numbers)
+- [x] Extract hand-crafted features:
+  - [x] urgency word count (urgent, verify, click here, suspended...)
+  - [x] number of links in body
+  - [x] caps ratio (% of uppercase characters)
+  - [x] exclamation mark count
+  - [x] body length
 - [ ] Save TF-IDF vectorizer for later use in the API
 
 **File:** `feature_extraction.py`
