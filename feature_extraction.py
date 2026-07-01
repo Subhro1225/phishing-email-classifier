@@ -3,6 +3,9 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer 
 from sklearn.model_selection import train_test_split
 
+# Saving the vectorizer for future use
+import joblib
+
 # reading csv file
 df = pd.read_csv("data/cleaned_email.csv")
 # print(df.head()) // prints first 5 rows of a dataframe.
@@ -27,7 +30,8 @@ x = vectorizer.fit_transform(df['text'])
 # spliting training and testing data
 x_train , x_test , y_train , y_test = train_test_split(x, df['label'] , test_size=0.2 , random_state=42)
 
-print(x_train.shape)
-print(x_test.shape)
-print(y_train.shape)
-print(y_test.shape)
+joblib.dump(vectorizer, 'models/vectorizer.pkl')
+joblib.dump(x_train, 'models/x_train.pkl')
+joblib.dump(x_test, 'models/x_test.pkl')
+joblib.dump(y_train, 'models/y_train.pkl')
+joblib.dump(y_test, 'models/y_test.pkl')
