@@ -97,7 +97,7 @@ Output:
 - [x] Save processed data (X_train, X_test, y_train, y_test) as .pkl files
 - [x] Save TF-IDF vectorizer for later use in the API
 
-**Note:** Hand-crafted features (urgency words, link count, caps ratio, SPF/DKIM/DMARC) will be added in Phase 4 for better interpretability and to match the team API contract with `top_signals`.
+**Note:** Hand-crafted features (urgency words, link count, caps ratio, SPF/DKIM/DMARC) will be added in Phase 5 for better interpretability and to match the team API contract with `top_signals`.
 
 **Files:** `feature_extraction.py`
 
@@ -107,33 +107,54 @@ Output:
 
 ---
 
-### Phase 3 — Model Training & Evaluation
-> Train ML models and measure how well they detect phishing.
+### Phase 3 — Train/Test Split & Data Pipeline
+> Prepare data for model training with proper splitting and data persistence.
 
 - [x] Split data: 80% training / 20% testing
-- [x] Train Naive Bayes model (baseline) → **F1: 0.9649** ✅
-- [x] Train Random Forest model (comparison) → **F1: 0.9835** 
-- [x] Evaluate both models using:
-  - [x] Precision (Naive Bayes: 0.9759, Random Forest: 0.9859)
-  - [x] Recall (Naive Bayes: 0.9540, Random Forest: 0.9811)
-  - [x] F1 Score (Naive Bayes: 0.9649, Random Forest: 0.9835)
-- [x] Compare results — **selected Naive Bayes for API**
-- [x] Save both models to `models/` folder
+- [x] Save processed data (X_train, X_test, y_train, y_test) as .pkl files
+- [x] Save TF-IDF vectorizer as .pkl file
+- [x] Create reproducible pipeline with random_state=42
 
-**Decision Rationale:** Naive Bayes chosen for final API due to:
-- 96.49% F1 score (excellent accuracy)
-- Millisecond inference time (critical for user experience)
-- 2% performance difference from Random Forest doesn't justify slower inference
+**Files:** `feature_extraction.py`
 
-**Files:** `train.py`
+**Outcome:**
+- Training set: 65,710 emails
+- Test set: 16,428 emails
+- Vocabulary: 5,000 words
+- All data saved and ready for model training
 
 ---
 
-### Phase 4 — API & Production Features
-> Wrap the trained model in FastAPI, add explainability, and match team contract.
+### Phase 4 — Model Training & Comparison
+> Train three production-grade models and pick the best performer.
+
+- [ ] Train Random Forest model (baseline)
+  - [ ] Tune hyperparameters
+  - [ ] Evaluate: precision, recall, F1
+  - [ ] Save to `models/random_forest_model.pkl`
+- [ ] Train XGBoost model (gradient boosting)
+  - [ ] Tune hyperparameters
+  - [ ] Evaluate: precision, recall, F1
+  - [ ] Save to `models/xgboost_model.pkl`
+- [ ] Train LightGBM model (fast gradient boosting)
+  - [ ] Tune hyperparameters
+  - [ ] Evaluate: precision, recall, F1
+  - [ ] Save to `models/lightgbm_model.pkl`
+- [ ] Compare all three models side-by-side
+- [ ] Select best model based on F1 score + inference speed
+- [ ] Export best model to ONNX format
+
+**Files:** `train.py`
+
+**Expected outcomes:** F1 scores for all three models, comparison table
+
+---
+
+### Phase 5 — API & Production Features
+> Wrap the best model in FastAPI, add explainability, and match team contract.
 
 - [ ] Create FastAPI server on port 8001
-- [ ] Load saved Naive Bayes model and TF-IDF vectorizer on startup
+- [ ] Load saved best model and TF-IDF vectorizer on startup
 - [ ] Add hand-crafted feature extraction:
   - [ ] Urgency word detection (verify, urgent, confirm, click, suspended...)
   - [ ] Sender domain validation (extract domain, check against known brands)
@@ -175,7 +196,7 @@ Output: {
 
 ---
 
-### Phase 5 — Integration & Handoff
+### Phase 6 — Integration & Handoff
 > Connect with the browser extension team (Team 3).
 
 - [ ] Confirm API contract with Team 3
@@ -234,18 +255,27 @@ phase4: fastapi endpoint live
 
 ```
 pandas
+numpy
 scikit-learn
+matplotlib
+seaborn
+jupyter
 fastapi
 uvicorn
+joblib
 nltk
 beautifulsoup4
-joblib
+shap
+onnx
+skl2onnx
 ```
 
 Install with:
 ```bash
 pip install -r requirements.txt
 ```
+
+**Note:** SHAP and ONNX will be installed in Phase 4 for explainability and model export.
 
 ---
 
@@ -254,7 +284,7 @@ pip install -r requirements.txt
 | Member | Role |
 |---|---|
 | You | ML model, feature engineering, API |
-| Girlfriend | ML model, data cleaning, evaluation |
+| priya | ML model, data cleaning, evaluation |
 
 ---
 
