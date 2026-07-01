@@ -128,21 +128,21 @@ Output:
 ### Phase 4 — Model Training & Comparison
 > Train three production-grade models and pick the best performer.
 
-- [ ] Train Random Forest model (baseline)
-  - [ ] Tune hyperparameters
-  - [ ] Evaluate: precision, recall, F1
-  - [ ] Save to `models/random_forest_model.pkl`
-- [ ] Train XGBoost model (gradient boosting)
-  - [ ] Tune hyperparameters
-  - [ ] Evaluate: precision, recall, F1
-  - [ ] Save to `models/xgboost_model.pkl`
-- [ ] Train LightGBM model (fast gradient boosting)
-  - [ ] Tune hyperparameters
-  - [ ] Evaluate: precision, recall, F1
-  - [ ] Save to `models/lightgbm_model.pkl`
-- [ ] Compare all three models side-by-side
-- [ ] Select best model based on F1 score + inference speed
-- [ ] Export best model to ONNX format
+- [x] Train Random Forest model (baseline)
+  - [x] Tune hyperparameters
+  - [x] Evaluate: precision, recall, F1
+  - [x] Save to `models/random_forest_model.pkl`
+- [x] Train XGBoost model (gradient boosting)
+  - [x] Tune hyperparameters
+  - [x] Evaluate: precision, recall, F1
+  - [x] Save to `models/xgboost_model.pkl`
+- [x] Train LightGBM model (fast gradient boosting)
+  - [x] Tune hyperparameters
+  - [x] Evaluate: precision, recall, F1
+  - [x] Save to `models/lightgbm_model.pkl`
+- [x] Compare all three models side-by-side
+- [x] Select best model based on F1 score + inference speed
+- [x] Export best model to ONNX format
 
 **Files:** `train.py`
 
