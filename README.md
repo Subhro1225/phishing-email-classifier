@@ -254,7 +254,7 @@ pip install -r requirements.txt
 | Member | Role |
 |---|---|
 | You | ML model, feature engineering, API |
-| Priya | ML model, data cleaning, evaluation |
+| Girlfriend | ML model, data cleaning, evaluation |
 
 ---
 
